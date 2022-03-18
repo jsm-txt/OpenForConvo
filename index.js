@@ -29,6 +29,13 @@ app.get('/chat-room', (req, res) => {
   res.render('chat-room')
 })
 
+app.get('/chat-room/sports', (req, res) => {
+  res.render('chat-sports')
+})
+
+app.get('/chat-room/news', (req, res) => {
+  res.render('chat-news')
+})
 io.on('connection', (socket) => {
   socket.on('chat message', (msg) => {
     io.emit('chat message', msg);
@@ -40,7 +47,7 @@ io.on('connection', (socket) => {
   //   io.emit('chat message', msg);
   // });
  
-  io.emit('chat message', 'a user has connected');
+  //io.emit('chat message', 'a user has connected');
   socket.on('disconnect', () => {
     console.log('user disconnected');
   //  io.emit('chat message', 'a user has disconnected');
