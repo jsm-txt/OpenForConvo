@@ -27,7 +27,7 @@
 
   body {
     margin: 0;
-    padding-bottom: 3rem;
+    padding-bottom: 0rem;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
 
@@ -44,7 +44,7 @@
     backdrop-filter: blur(10px);
   }
 
-  #input {
+  input {
     border: none;
     padding: 0 1rem;
     flex-grow: 1;
@@ -79,6 +79,16 @@
   #messages>li:nth-child(odd) {
     background: #fae3e3;
   }
+  .input-message{
+    
+    border:solid 1px;
+    border-color:rgba(252, 214, 214, 0.16) ;
+    border-radius: 3px;
+    padding-top: 5px;
+   
+    padding-left: 1rem;
+  }
+
 </style>
 
 <body>
@@ -88,20 +98,29 @@
         <h1 class=""><a href="/">OpenForConversation</a></h1>
       </div>
       <div class="button-row col d-flex p-3 justify-content-end">
-        <a href="/chat-room" class="btn navbar-btn">Home</a>
+        <a href="/" class="btn navbar-btn">Home</a>
         <a href="/" class="btn navbar-btn">Profile</a>
         <a href="/chat-room" class="btn navbar-btn">Chat room</a>
-        <a href="/chat-room" class="btn navbar-btn"> Create a chat room</a>
-        <a href="/chat-room" class="btn navbar-btn"> Sign up</a>
+        <a href="/" class="btn navbar-btn"> Create a chat room</a>
+        <a href="/" class="btn navbar-btn"> Sign up</a>
       </div>
     </div>
   </nav>
   
-  <form id="username-form" action="">
-    <input id="username" autocomplete="off" value="user"  /><button>Send</button>
-  </form>
+  {{!-- <form id="username-form" action="">
+    
+  </form> --}}
+  <div class="container-fluid text-center">
+    <h3>Chat Room SPORTS</h3>
+
+  </div>
   <ul id="messages"></ul>
+  
   <form id="form" action="">
+    
+    <span class="input-message" >Username:</span>
+    <input class="mr-4"id="username" autocomplete="off" style="max-width: 18rem;" value="User" />
+    <span class="input-message" id="inputGroup-sizing-default">Message:</span>
     <input id="input" autocomplete="off" /><button>Send</button>
   </form>
   <script src="/socket.io/socket.io.js"></script>
@@ -112,19 +131,19 @@
     var messages = document.getElementById('messages');
     var form = document.getElementById('form');
     var input = document.getElementById('input');
+    var username = document.getElementById('username');
+    let message = ''
+
+    //form.addEventListener('submit', function (e) {
+      //e.preventDefault();
+    //});
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (input.value) {
-        socket.emit('chat message', input.value);
-        input.value = '';
-      }
-    });
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (username.value) {
-        socket.emit('chat message', input.value);
+        message = username.value + ': ' + input.value
+        socket.emit('chat message', message);
+        //socket.emit('username', username.value);
         input.value = '';
       }
     });
