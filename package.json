@@ -2,6 +2,7 @@
   "name": "open-for-convo",
   "version": "0.0.1",
   "description": "a socket.io app",
+  "main": "index.js",
   "engines": {
     "node": "16.x"
   },
